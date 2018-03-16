@@ -1,0 +1,30 @@
+{{> header }}
+
+<h1><font color="brown">Bloom, Terra Search Results</h1>
+<h2><font color="black">Your search for "{{biotype.type}}" produced the following results:</h2>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+	
+      <th scope="col">Created On</th>
+      <th scope="col">Bloom Name</th>
+      <th scope="col">Details</th>
+      <th scope="col">Location</th>
+      <th scope="col">Created By</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each search}}
+    <tr>
+      <th scope="row">{{date}}</th>
+      <td>{{name}}</td>
+      <td>{{details}}</td>
+      <td>{{city}}, {{country}}</td>
+      <td>{{username}}</td>
+      <td><a href="/user/{{userid}}"><button>See User Details</button></a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+

@@ -1,0 +1,65 @@
+{{> header }}
+
+<div class="container">
+	<h1><font color="brown"> Create a Personal Bloom </h1>
+  {{#if errors}}
+    {{#each errors}}
+      <div class="alert alert-danger">
+      <p><font color="red"> {{this.msg}}  </p>
+      </div>
+    {{/each}}
+  {{/if}}
+	<font color="black">
+	<label for="projectLocation">  Project Location: </label>
+	<p>{{user.city}}, {{user.state}}  {{user.country}} (Bloom must be in your registered location)</p>
+	<hr>
+	<p>Please enter the details for your new Bloom.  You will sent recommendations based on your location, interests, and type of Bloom selected </p>
+	<form id="personalproject" method="POST" action="/personalbloom">
+	  <div class="form-row">
+    	    <div class="form-group col-md-6">
+      		<label for="inputPName">Bloom Name:</label>
+      		<input type="text" class="form-control" id="inputPname" name="pname" placeholder="Name your new Bloom" required>
+    	    </div>
+  	  </div>
+	  <div class="form-row"> 
+    	    <div class="form-group col-md-6">
+      		<label for="inputPinfo">Bloom info:</label>
+      		<input type="text" class="form-control" id="inputPinfo" name="pinfo" placeholder="Description of your project, i.e. Planting an Army of Petunias" required>
+    	    </div>
+	        <div class="form-group col-md-6">
+      		<label for="recBlooms">Type of Bloom:</label>
+      		<select id="recBlooms" class="form-control" name="ptype" required>
+        		<option value="selected" selected="selected" disabled="disabled">Select...</option>
+			{{#each biotype}}
+			<option value="{{id}}">{{type}}</option>
+			{{/each}}
+      		</select>    
+            </div>
+        </div>
+	<div class="form-row">
+	<div class="form-group col-md-6">
+		<div>
+			<label for="uploadPic">Upload Picture: (optional)</label>
+  			<input type="file" name="pic" accept="image/*">
+		</div>
+	</div>
+	</div>
+   <div style="clear: both;"></div> 
+    <div>
+        <h3>Privacy Settings (Clickable but implentation in FUTURE RELEASE):</h3>  
+          <input type="checkbox" name="displayname" id="displayname">Display User Name<br>
+          <input type="checkbox" name="displayemail" id="displayemail">Display User Email<br>
+          <input type="checkbox" name="displayphone" id="displayphone">Display User Phone<br>
+          <input type="checkbox" name="comments" id="comments">Allow Comments<br>
+          <input type="checkbox" name="aafollowers" id="aafollowers">Auto Accept Followers<br>
+          <input type="checkbox" name="dfollowers" id="dfollowers">Deny Followers<br>
+    </div>
+    
+    <div>
+	  <input type="hidden" name="userid" value="{{userid.id}}">
+  	  <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+    
+    </form>
+</div>
+<br><br>

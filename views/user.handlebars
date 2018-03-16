@@ -1,0 +1,49 @@
+{{> header }}
+<div class=container>
+<h2><font color="brown"> Details for user: {{user.first_name}} {{user.last_name}} </h2><font color="black">
+<div>
+	<u1> 
+		<li> Email: {{user.email}} </li>
+		{{#if users.skills}}	
+		<li> Skills: {{user.skills}} </li> 
+		{{/if}}
+		{{#if biotype.type}}	
+		<li> Biodiversity Interets: {{biotype.type}} </li>
+		{{/if}}
+	</ul>
+</div>
+
+<h3>{{user.first_name}}'s Current Blooms:</h3>
+{{#if blooms}}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Created</th>
+      <th scope="col">Category</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each blooms}}
+    <tr>
+      <th scope="row">{{date}}</th>
+      <td>{{biotype}}</td>
+      <td>{{name}}</td>
+      <td>{{details}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+<p> This user hasn't created any blooms yet. Maybe you can send him a comment and sugget one! </p>
+{{/if}}
+<br>
+<h3> Send a Comment to {{user.first_name}} </h3>
+<form action="/user" method="post">
+  Your Email: <input type="text" class="form-control" name="PosterEmail">
+  <br/>
+  <input type="text" class="form-control" name="comment">
+  <input type="submit" value="Post" class="comment-btn">
+</form>
+</div>

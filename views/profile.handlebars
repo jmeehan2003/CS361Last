@@ -1,0 +1,145 @@
+{{> header }}
+
+
+<div class="container">
+<div class="row">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 >User Profile</h4>
+		</div>
+		<div class="panel-body">
+			<div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+				<img alt="User Pic" src="static/blankProfilePic.png" id="profile-image1" class="img-circle img-responsive"> 
+			</div>
+			<div class="col-md-8 col-xs-12 col-sm-6 col-lg-8" >
+				<div class="container" >
+					<h2>Welcome {{user.first_name}} {{user.last_name}}</h2
+					{{#if title}}
+					<h2> {{title}}</h2>
+					{{/if}}
+					<ul class="container details" >
+						{{#if user.skills}}
+						<li><p><i class="far fa-envelope"></i>Your skills: {{user.skills}}</p></li>
+						{{/if}}
+						
+						<!-- can't get it to work
+						<li><p><i class="far fa-star"></i>Your favorite biodiversity: {{bloom.biotype}}{{bloom.date}}{{blooms.biotype}}</p></li> -->
+						
+					</ul>
+				</div>
+				<hr>
+					<h3> Let's start increasing the biodiversity out there! </h3>
+					<ul>
+							<form action="/personalbloom" method="GET" style="margin: 15; padding:0;" >
+						<li><p> Create a new Bloom!
+							<input style="display: inline;" type="hidden" name="userid" value="{{user.id}}">
+							<button type="submit" class="btn btn-success">Create Now!</button>
+							</p></form>
+						<li><p> Create a Community Bloom!(in a FUTURE RELEASE) </p>
+					</ul>
+				
+			</div>
+			<div class="col-md-8">
+				<h3> Search for users or blooms by name</h3>
+				<form id="searchFull" action="/search" method="GET">
+					<input type="text" id="searchReq" name="searchVal">
+					<button type="submit" class="btn btn-primary">Search</button>
+				</form>
+	
+				<form id="searchBiotype" action="/searchBio" method="GET">
+				<h3>Or search by biodiversity category</h3>
+				<select id="searchBiotype" name="bio" width="160" style="width: 160px">
+					<option value="select" selected="selected" disabled="disabled"> Choose...</option>
+					{{#each biotypes}}
+					<option value="{{id}}">{{type}}</option>
+					{{/each}}
+				</select>
+				<button type="submit" class="btn btn-primary">Search</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-lg-12 col-sm-12">
+	<div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+		<div class="btn-group" role="group">
+			<button type="button" id="feed" class="btn btn-primary" href="#myBlooms" data-toggle="tab">
+				<i class="far fa-newspaper"></i>
+				<div class="hidden-xs">My Blooms</div>
+			</button>
+		</div>
+		<div class="btn-group" role="group">
+			<button type="button" id="favorites" class="btn btn-default" href="#Comments" data-toggle="tab">
+				<i class="fas fa-heart"></i>
+				<div class="hidden-xs">Comments</div>
+			</button>
+		</div>
+		<div class="btn-group" role="group">
+			<button type="button" id="blooms" class="btn btn-default" href="#newsFeed" data-toggle="tab">
+				<i class="fas fa-tree"></i>
+				<div class="hidden-xs">News Feed</div>
+			</button>
+		</div>
+	</div>
+	<div class="well">
+		<div class="tab-content">
+			<div class="tab-pane fade in active" id="myBlooms">
+				<h3>Your Current Blooms:</h3>
+        		{{#if bloom}}
+			   <table class="table">
+				<thead>
+    				  <tr>
+      				    <th scope="col">Created</th>
+      				    <th scope="col">Category</th>
+      				    <th scope="col">Name</th>
+      				    <th scope="col">Description</th>
+    				  </tr>
+  				</thead>
+  				<tbody>
+				  {{#each bloom}}
+				   <tr>
+      					<th scope="row">{{date}}</th>
+      					<td>{{biotype}}</td>
+      					<td>{{name}}</td>
+      					<td>{{details}}</td>
+    				   </tr>
+				  {{/each}}
+				</tbody>
+			  </table>
+			{{else}}
+			<p>You haven't created any blooms yet. Start one today!</p>
+			{{/if}} 
+			</div>
+			<div class="tab-pane fade in" id="Comments">
+			<div class="warning" id="no_go"></div>
+				{{#if pagecomments}}
+				{{#each pagecomments}}
+					<ul id="comment-stream" class="comment-stream">
+					<li>{{UserName}}</span></li>
+					<li>&nbsp;->&nbsp;{{Comment}}</span></li>
+					<li>&nbsp;{{CommentDate}}</span></li>
+					</ul>
+				{{/each}}	
+				{{else}}
+				<h3>No one has commented on your profile yet.</h3>
+				{{/if}}
+			</div>
+			<div class="tab-pane fade in" id="newsFeed">
+				<h3>This is where the user's news feed will appear (in a FUTURE RELEASE)</h3>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+$(document).ready(function() {
+$(".btn-pref .btn").click(function () {
+    $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+    // $(".tab").addClass("active"); // instead of this do the below 
+    $(this).removeClass("btn-default").addClass("btn-primary");   
+});
+});
+</script>
+
+

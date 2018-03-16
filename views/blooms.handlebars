@@ -1,0 +1,36 @@
+{{> header }}
+<div class=container>
+<h2><font color="brown"> Details for bloom: {{bloom.name}}</h2><font color="black">
+<!-- <div>
+	<u1> 
+		<li> Category: {{bloom.biotype}} </li>
+		<li> Created on: {{bloom.date}} </li> 
+		<li> Created by: {{bloom.username}} </li>
+		<li> Details: {{bloom.details}} </li>
+		<li> Location: {{bloom.city}},  {{bloom.country}}</li>
+	</ul>
+</div> -->
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Category</th>
+      <th scope="col">Created On</th>
+      <th scope="col">Details</th>
+      <th scope="col">Location</th>
+      <th scope="col">Created By</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{bloom.biotype}}</th>
+      <td>{{bloom.date}}</td>
+      <td>{{bloom.details}}</td>
+      <td>{{bloom.city}}, {{bloom.country}}</td>
+      <td>{{bloom.username}}</td>
+      <td><a href="/user/{{bloom.userid}}"><button>See User Details</button></a></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+</div>

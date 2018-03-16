@@ -1,0 +1,25 @@
+{{> header }}
+
+<h1>Bloom, Terra Search Results</h1>
+<h2>Your search for "{{searchWord}}" produced the following results:</h2>
+<br>
+<table class="table">
+	<thead>
+	<tr>
+	  <th scope="col">Category</th>
+	  <th scope="col">Name</th>
+	  <th scopre="col"></th>
+	</tr>
+	</thead>
+	<tbody>
+		{{#each search}}
+		<tr>
+			<th scope="row">{{Category}}</td>
+			<td>{{Name}}</td>
+			<td><a href="/{{Category}}/{{id}}"><button>See Details/Comment</button></a></td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+<br>
+
